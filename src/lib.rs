@@ -29,4 +29,15 @@ impl<T: Default> SampleVector<T> {
         self.elements.len()
     }
 
+    pub fn push(&mut self, element: T) {
+        if self.len == self.capacity() {
+            self.grow();
+        }
+
+        self.elements[self.len] = element;
+        self.len += 1;
+    }
+
+    fn grow(&mut self) {
+    }
 }
