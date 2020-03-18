@@ -1,5 +1,5 @@
 pub struct SampleVector<T> {
-    elements: Box<T>,
+    elements: Box<[T]>,
     len: usize
 }
 
