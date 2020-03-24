@@ -1,17 +1,17 @@
 pub struct SampleVector<T> {
     elements: Box<[T]>,
-    len: usize
+    len: usize,
 }
 
 impl<T: Default> SampleVector<T> {
     pub fn new() -> Self {
-        Self::with_capacity(0)
+        Self::with_capacity(10)
     }
 
     pub fn with_capacity(capacity: usize) -> Self {
         Self {
             elements: Self::allocate_in_heap(capacity),
-            len: 0
+            len: 0,
         }
     }
 
@@ -46,6 +46,12 @@ impl<T: Default> SampleVector<T> {
         }
     }
 
-    fn grow(&mut self) {
+    pub fn get_or<'a>(&'a self, index: usize, default: &'a T) -> &'a T {
+        match self.get(index) {
+            Some(v) => v,
+            None => default,
+        }
     }
+
+    fn grow(&mut self) {}
 }

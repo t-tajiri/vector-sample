@@ -8,4 +8,10 @@ fn main() {
 
     let element = vector.get(1);
     assert_eq!(element, Some(&"Budgerigar".to_string()));
+
+    let expect_default_message = &"default message".to_string();
+    assert_eq!(
+        expect_default_message,
+        vector.get_or(2, expect_default_message)
+    );
 }
