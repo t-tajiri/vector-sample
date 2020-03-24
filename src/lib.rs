@@ -5,7 +5,7 @@ pub struct SampleVector<T> {
 
 impl<T: Default> SampleVector<T> {
     pub fn new() -> Self {
-        Self::with_capacity(10)
+        Self::with_capacity(0)
     }
 
     pub fn with_capacity(capacity: usize) -> Self {
@@ -53,5 +53,15 @@ impl<T: Default> SampleVector<T> {
         }
     }
 
-    fn grow(&mut self) {}
+    fn grow(&mut self) {
+        if self.capacity() == 0 {
+            self.elements = Self:: allocate_in_heap(1)
+        } else {
+            let new_elements = Self::allocate_in_heap(self.capacity() * 2);
+            let old_elements = std::mem::replace(&mut self.elements, new_elements);
+            for (i, element) in old_elements.into_vec().into_iter().enumerate() {
+                self.elements[i] = element;
+            }
+        }
+    }
 }
