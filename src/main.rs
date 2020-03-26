@@ -14,4 +14,6 @@ fn main() {
         expect_default_message,
         vector.get_or(2, expect_default_message)
     );
+
+    assert_eq!(Some("Budgerigar".to_string()), vector.pop());
 }

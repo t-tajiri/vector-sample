@@ -53,6 +53,16 @@ impl<T: Default> SampleVector<T> {
         }
     }
 
+    pub fn pop(&mut self) -> Option<T> {
+        if self.len == 0 {
+            None
+        } else {
+            self.len -= 1;
+            let element = std::mem::replace(&mut self.elements[self.len], Default::default());
+            Some(element)
+        }
+    }
+
     fn grow(&mut self) {
         if self.capacity() == 0 {
             self.elements = Self:: allocate_in_heap(1)
